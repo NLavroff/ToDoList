@@ -1,0 +1,8 @@
+<h1>To Do</h1>
+<div *ngFor="let task of toDoList; let index = index" (click)="task.done=true">
+  <ng-container *ngIf="!task.done">
+    <div>{{task.title}}</div>
+    <div>{{task.description}}</div>
+    <button (click)="toDoList.splice(index, 1)">Supprimer</button>
+  </ng-container>
+</div>
