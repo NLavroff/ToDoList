@@ -1,28 +1,28 @@
+<h1>To Do List</h1>
+
 <form [formGroup]="myForm">
   <label>Titre</label>
   <input type="text" formControlName="title"/>
   <label>Description</label>
   <input type="text" formControlName="description" />
+  <button (click)="onSubmit()">Ajouter</button>
 </form>
-<button (click)="onSubmit()">Submit</button>
 
-<pre>{{myForm.value | json}}</pre>
 
-<h1>To Do</h1>
-<div *ngFor="let task of toDoList; let index = index" (click)="task.done=true">
+<h2>To Do</h2>
+<div *ngFor="let task of list; let i = index" (click)="task.done=true">
   <ng-container *ngIf="!task.done">
     <div>{{task.title}}</div>
     <div>{{task.description}}</div>
-    <button (click)="toDoList.splice(index, 1)">Supprimer</button>
+    <button (click)="list.splice(i, 1)">Supprimer</button>
   </ng-container>
-
 </div>
 
-<h1>Done</h1>
-<div *ngFor="let task of toDoList; let index = index" (click)="task.done=false">
+<h2>Done</h2>
+<div *ngFor="let task of list; let i= index" (click)="task.done=false">
   <ng-container *ngIf="task.done">
     <div>{{task.title}}</div>
     <div>{{task.description}}</div>
-    <button (click)="toDoList.splice(index, 1)">Supprimer</button>
+    <button (click)="list.splice(i, 1)">Supprimer</button>
   </ng-container>
 </div>

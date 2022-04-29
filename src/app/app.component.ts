@@ -8,48 +8,37 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   title = 'todolist';
-  toDoList = [
+
+  list = [
     {
-      title: 'fait',
-      description: 'description',
+      title: 'Angular',
+      description: 'Ajouter les input',
       done: false,
     },
     {
-      title: 'à faire',
-      description: 'description',
+      title: 'JS',
+      description: 'Réviser la POO',
       done: false,
     },
   ];
 
   public myForm = new FormGroup({
-    title: new FormControl('coucou'),
-    description: new FormControl('hello'),
+    title: new FormControl(''),
+    description: new FormControl(''),
   });
 
   onSubmit() {
-    //récupérer la tache
-    //comparer la tache avec la toDoList s'il existe déjà
-    //si non le push
     const task = this.myForm.value;
     console.log(task);
-    console.table(this.toDoList);
-    // let isDuplicate = false;
-    // this.toDoList.forEach(toDoListTask => {
-    //   if(toDoListTask.title === task.title && toDoListTask.description === task.description) {
-    //     isDuplicate = true;
-    //   }
-    // })
-    // if (!isDuplicate) {
-    //   this.toDoList.push(this.myForm.value);
-    // }
-    const find = this.toDoList.find(
+    console.table(this.list);
+    const find = this.list.find(
       (toDoListTask) =>
         toDoListTask.title === task.title &&
         toDoListTask.description === task.description
     );
     console.log(find);
     if (!find) {
-      this.toDoList.push(this.myForm.value);
+      this.list.push(task);
     }
   }
 }
