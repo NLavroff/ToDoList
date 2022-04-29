@@ -1,28 +1,9 @@
-<h1>To Do List</h1>
+<app-navbar></app-navbar>
 
-<form [formGroup]="myForm">
-  <label>Titre</label>
-  <input type="text" formControlName="title"/>
-  <label>Description</label>
-  <input type="text" formControlName="description" />
-  <button (click)="onSubmit()">Ajouter</button>
-</form>
+  <div class="app">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 
-
-<h2>To Do</h2>
-<div *ngFor="let task of list; let i = index" (click)="task.done=true">
-  <ng-container *ngIf="!task.done">
-    <div>{{task.title}}</div>
-    <div>{{task.description}}</div>
-    <button (click)="list.splice(i, 1)">Supprimer</button>
-  </ng-container>
-</div>
-
-<h2>Done</h2>
-<div *ngFor="let task of list; let i= index" (click)="task.done=false">
-  <ng-container *ngIf="task.done">
-    <div>{{task.title}}</div>
-    <div>{{task.description}}</div>
-    <button (click)="list.splice(i, 1)">Supprimer</button>
-  </ng-container>
-</div>
+<app-footer></app-footer>
