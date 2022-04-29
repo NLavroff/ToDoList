@@ -3,6 +3,7 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import '@fortawesome/fontawesome-free/css/all.css';
+@import '~ngx-toastr/toastr';
 
 body {
   background-image: url('./assets/img/Bckground.png');
@@ -28,4 +29,8 @@ input[type = text] {
   background-color: #e9eeff!important;
   color: #4772fe!important;
   border: none!important;
+ }
+
+ .border-danger {
+   border: 1px solid red;
  }

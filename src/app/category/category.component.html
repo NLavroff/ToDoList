@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-inline">
+    <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit(f)" class="form-inline">
       <div class="col-md-10 form-group">
         <input
           type="text"
@@ -17,6 +17,9 @@
           name="categoryName"
           class="form-control-plaintext drop-shadow"
           ngModel
+          required
+          #category="ngModel"
+          [ngClass]="{ 'border-danger': f.submitted && category.invalid }"
         />
       </div>
       <button
@@ -25,13 +28,17 @@
       >
         Ajouter
       </button>
+
+      <div class="text-danger ml-3" *ngIf="f.submitted && category.invalid && category.errors?.required">
+        Une catégorie est requise.
+      </div>
     </form>
   </div>
 </div>
 
 <div class="row categories-list">
-  <div class="col-md-3">
-    <div class="card drop-shadow">
+  <div class="col-md-3" *ngFor="let category of categories">
+    <div class="card drop-shadow" [style.border-left-color]="category.data.colorCode">
       <div class="card-body">
         <div class="clearfix">
           <div class="float-left">
@@ -44,12 +51,12 @@
         </div>
 
         <div class="todo-content">
-          <h3>Catégorie</h3>
+          <h3 [style.color]="category.data.colorCode">{{category.data.category}}</h3>
           <small class="text-secondary"
-            >Lorem ipsum, dolor sit amet consectetur adipisicing elit. </small>
+            >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          </small>
         </div>
-        <span class="badge badge-danger">3 - Todos</span>
-
+        <span class="badge badge-danger">{{category.data.todoCount}} - Todos</span>
       </div>
     </div>
   </div>
