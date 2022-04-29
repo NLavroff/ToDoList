@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "todolist-30e05": {
+      "hosting": {
+        "todolist": [
+          "todolist-30e05"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "todolist-30e05"
+  }
+}

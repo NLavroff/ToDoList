@@ -1,23 +1,57 @@
-<div class="container">
-  <div class="container-list">
-    <h2>To Do</h2>
-    <div *ngFor="let task of list; let i = index" (click)="task.done=true">
-      <ng-container *ngIf="!task.done">
-        <div>{{task.title}}</div>
-        <div>{{task.description}}</div>
-        <button class="btn" (click)="list.splice(i, 1)">Supprimer</button>
-      </ng-container>
-    </div>
+<div class="row justify-content-center">
+  <div class="col-md text-center">
+    <h1>TODOS</h1>
+    <p class="text-info">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </p>
   </div>
+</div>
 
-  <div class="container-list">
-  <h2>Done</h2>
-    <div *ngFor="let task of list; let i= index" (click)="task.done=false">
-      <ng-container *ngIf="task.done">
-        <div>{{task.title}}</div>
-        <div>{{task.description}}</div>
-        <button class="btn" (click)="list.splice(i, 1)">Supprimer</button>
-      </ng-container>
+<div class="row">
+  <div class="col-md-12">
+    <form action="" class="form-inline">
+      <div class="col-md-10 form-group">
+        <input
+          type="text"
+          placeholder="Ajouter une tâche"
+          name="todoText"
+          class="form-control-plaintext drop-shadow"
+        />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary col-md-2 btn-todo btn-block drop-shadow"
+      >
+        Ajouter
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="row justify-content-center todo-list">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left text-secondary">
+            <i class="far fa-circle text-danger"></i>
+            <i class="fas fa-check text-success"></i>
+            New Todo
+          </div>
+
+          <div class="float-right">
+            <i class="far fa-check-circle text-success"></i>
+            <i class="far fa-times-circle text-danger"></i>
+            <div class="todo-tools">
+              <small>
+                <i class="fas fa-pencil-alt text-warning"></i>
+                <i class="fas fa-trash text-danger"></i>
+              </small>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
