@@ -29,9 +29,15 @@ export class CategoryService {
   }
 
   updateCategory(id: string, updatedData: string) {
-    this.afs.doc('categories/' + id).update({category: updatedData}).then( () => {
+    this.afs.doc('categories/' + id).update({category: updatedData}).then(() => {
       this.toastr.success('La nouvelle catégorie a bien été éditée')
     });
+  }
+
+  deleteCategory(id: string) {
+    this.afs.doc('categories/' + id).delete().then(() => {
+      this.toastr.error('La nouvelle catégorie a bien été supprimée')
+    })
   }
 
 }
