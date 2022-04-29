@@ -11,22 +11,25 @@ export class CategoryComponent implements OnInit {
   color: Array<any> = [
     '#e7845e',
     '#fc0184',
-    '#f6b93f',
+    '#ffd166',
     '#9224a7',
     '#20c898',
     '#f03734',
     '#aad450',
     '#026467',
-    '#fefefe',
-    '#928779',
+    '#264653',
+    '#2a9d8f',
     '#d4d2a5',
-    '#fcdebe',
+    '#e9c46a',
     '#90a583',
-    '#b26e63',
-    '#c6caed'
+    '#f4a261',
+    '#e76f51'
   ];
 
   categories!: Array<any>;
+  categoryName: string = '';
+  dataStatus: string = 'Ajouter';
+  catId!: string;
 
   constructor(private categoryService: CategoryService) {}
 
@@ -34,22 +37,33 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.loadCategories().subscribe(val => {
       this.categories = val;
-      console.log('categoooooo', this.categories);
-      console.log(val);
     })
   }
 
   onSubmit(f: NgForm) {
 
-    let randomNumber = Math.floor(Math.random() * this.color.length);
+    if(this.dataStatus === "Ajouter") {
 
-    let todoCategory = {
+      let randomNumber = Math.floor(Math.random() * this.color.length);
+      let todoCategory = {
       category: f.value.categoryName,
       colorCode: this.color[randomNumber],
       todoCount: 0,
     };
+      this.categoryService.saveCategory(todoCategory);
+      f.resetForm();
 
-    this.categoryService.saveCategory(todoCategory);
+    } else if(this.dataStatus === "Editer") {
 
+      this.categoryService.updateCategory(this.catId, f.value.categoryName);
+      f.resetForm();
+    }
+
+   }
+
+   onEdit(category: string, id: string) {
+     this.categoryName = category;
+     this.dataStatus = 'Editer';
+     this.catId = id;
    }
 }

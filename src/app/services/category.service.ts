@@ -12,7 +12,6 @@ export class CategoryService {
 
   saveCategory(data: any) {
     this.afs.collection('categories').add(data).then(ref => {
-
       this.toastr.success('La nouvelle catégorie a bien été ajoutée')
     });
   }
@@ -27,6 +26,12 @@ export class CategoryService {
         })
       })
     );
+  }
+
+  updateCategory(id: string, updatedData: string) {
+    this.afs.doc('categories/' + id).update({category: updatedData}).then( () => {
+      this.toastr.success('La nouvelle catégorie a bien été éditée')
+    });
   }
 
 }
