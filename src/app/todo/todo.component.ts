@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { TodoService } from 'app/services/todo.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'todo',
@@ -7,9 +10,29 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
-  @Input() list: any[] = [];
+  catId: any;
+  todos!: Array<any>;
+
+  constructor(private todoService: TodoService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.catId = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.todoService.loadTodos(this.catId).subscribe(val => {
+      this.todos = val;
+      console.log(val);
+    })
+  }
+
+  onSubmit(f:NgForm) {
+
+    let todo = {
+      todo: f.value.todoText,
+      isCompleted: false
+    }
+
+    this.todoService.saveTodo(this.catId, todo);
+    f.resetForm();
   }
 
 }
